@@ -14,11 +14,11 @@ class MarketTypesSeeder extends Seeder
      */
     public function run(): void
     {
-        MarketType::create(['markettypename' => 'Hipermercado']);
-        MarketType::create(['markettypename' => 'Supermercado']);
-        MarketType::create(['markettypename' => 'Mercado']);
-        MarketType::create(['markettypename' => 'Colmado']);
-        MarketType::create(['markettypename' => 'Almacen']);
-        MarketType::create(['markettypename' => 'Otros']);
+        MarketType::create(['name' => 'Hipermercado']);
+        MarketType::create(['name' => 'Supermercado']);
+        MarketType::create(['name' => 'Mercado']);
+        MarketType::create(['name' => 'Colmado']);
+        MarketType::create(['name' => 'Almacen']);
+        MarketType::create(['name' => 'Otros']);
     }
 }
