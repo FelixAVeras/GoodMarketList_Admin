@@ -28,24 +28,18 @@
           </ul>
         </li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categorias y Productos <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="{{ route('market-types.index') }}">Tipo de Mercados</a></li>
-            <li><a href="{{ route('markets.index') }}">Mercados</a></li>
-            <li><a href="#">Something else here</a></li>
+            <li><a href="{{ route('categories.index') }}">Categorias</a></li>
+            <li><a href="{{ route('products.index') }}">Productos</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
+            <li><a href="#">Subir Productos</a></li>
+            <!-- <li role="separator" class="divider"></li>
+            <li><a href="#">One more separated link</a></li> -->
           </ul>
         </li>
+        <li><a href="#">Precios</a></li>
       </ul>
-      <form class="navbar-form navbar-left">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#">Link</a></li>
         <li class="dropdown">
