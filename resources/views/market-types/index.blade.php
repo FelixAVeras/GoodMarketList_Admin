@@ -8,6 +8,41 @@
 
 <h3 class="display-4 mb-4">Tipos de Mercados</h3>
 
+<div class="row">
+    <div class="col-xs-12 col-md-12">
+        <a href="{{ route('market-types.create') }}" class="btn btn-primary pull-right">Agregar Nuevo</a>
+    </div>
+</div>
 
-
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse ($marketTypes as $mt)
+            <tr>
+                <td>{{ $mt->name }}</td>
+                <td>
+                   <div class="btn-group" role="group">
+                        <a href="{{ route('market-types.edit', $mt->id) }}" class="btn btn-warning"><i class="glyphicon glyphicon-pencil"></i></a>
+                        <form action="{{ route('market-types.destroy', $mt->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            @empty
+            <tr>
+                <td colspan="2" class="text-center text-danger"><h3>Sin Informacion</h3></td>
+            </tr>
+            @endforelse
+        </tbody>
+    </table>
+</div>
 @endsection
