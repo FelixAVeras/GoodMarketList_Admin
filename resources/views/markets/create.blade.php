@@ -42,13 +42,17 @@ Mercado
                     </div>
                     <div class="col-xs-12 col-md-4">
                         <div class="form-group">
-                            <label for="name" class="form-label">Ciudad</label>
-                            <select name="city_id" id="city_id" class="form-control">
-                                <option value=""> -- Seleccione -- </option>
+                            <label for="city_ids" class="form-label">Ciudad(es)</label>
+                            <select id="city_ids" name="city_ids[]" class="form-control" multiple>
                                 @foreach($cities as $city)
-                                    <option value="{{ $city->id }}">{{ $city->name }}</option>
+                                    <option value="{{ $city->id }}"
+                                        {{ isset($market) && $market->cities->contains($city->id) ? 'selected' : '' }}>
+                                        {{ $city->name }}
+                                    </option>
                                 @endforeach
                             </select>
+                            <small class="form-text text-muted">Mantén presionado Ctrl o Cmd para seleccionar múltiples ciudades.</small>
+                        </div>
                         </div>
                     </div>
                 </div>

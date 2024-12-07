@@ -12,47 +12,68 @@ use App\Models\MarketType;
 class MarketsController extends Controller
 {
     public function index() {
-        $markets = Market::with(['city', 'marketType'])->get();
+        $markets = Market::with(['cities', 'marketType'])->get();
 
         return view('markets.index', compact('markets'));
     }
 
     public function create() {
-        $cities = City::all();
         $marketTypes = MarketType::all();
-
-        return view('markets.create', compact('cities', 'marketTypes'));
+        $cities = City::all();
+    
+        return view('markets.create', compact('marketTypes', 'cities'));
     }
 
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         $request->validate([
-            'name' => 'required',
-            'city_id' => 'required|exists:cities,id',
+            'name' => 'required|string|max:255',
             'market_type_id' => 'required|exists:market_types,id',
+            'city_ids' => 'nullable|array',
+            'city_ids.*' => 'exists:cities,id',
         ]);
 
-        Market::create($request->all());
-        return redirect()->route('markets.index')->with('success', 'Market creado exitosamente.');
+        $market = Market::create([
+            'name' => $request->name,
+            'market_type_id' => $request->market_type_id,
+        ]);
+
+        // Asignar las ciudades al mercado
+        if ($request->has('city_ids')) {
+            $market->cities()->sync($request->city_ids);
+        }
+
+        return redirect()->route('markets.index')->with('success', 'Mercado creado exitosamente.');
     }
 
     public function edit(Market $market)
     {
-        $cities = City::all();
         $marketTypes = MarketType::all();
-        return view('markets.edit', compact('market', 'cities', 'marketTypes'));
+        $cities = City::all();
+    
+        return view('markets.edit', compact('market', 'marketTypes', 'cities'));
     }
 
-    public function update(Request $request, Market $market)
-    {
+    public function update(Request $request, Market $market) {
         $request->validate([
-            'name' => 'required',
-            'city_id' => 'required|exists:cities,id',
+            'name' => 'required|string|max:255',
             'market_type_id' => 'required|exists:market_types,id',
+            'city_ids' => 'nullable|array',
+            'city_ids.*' => 'exists:cities,id',
         ]);
 
-        $market->update($request->all());
-        return redirect()->route('markets.index')->with('success', 'Market actualizado exitosamente.');
+        $market->update([
+            'name' => $request->name,
+            'market_type_id' => $request->market_type_id,
+        ]);
+
+        // Actualizar las ciudades asociadas al mercado
+        if ($request->has('city_ids')) {
+            $market->cities()->sync($request->city_ids);
+        } else {
+            $market->cities()->detach(); // Si no se selecciona ninguna ciudad, desvincula todas
+        }
+
+        return redirect()->route('markets.index')->with('success', 'Mercado actualizado exitosamente.');
     }
 
     public function destroy(Market $market)

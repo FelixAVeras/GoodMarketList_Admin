@@ -20,7 +20,7 @@
             <tr>
                 <th>Nombre</th>
                 <th>Tipo de Mercado</th>
-                <th>Ciudad</th>
+                <th>Ciudad(es)</th>
                 <th></th>
             </tr>
         </thead>
@@ -29,7 +29,13 @@
             <tr>
                 <td>{{ $market->name }}</td>
                 <td>{{ $market->marketType->name }}</td>
-                <td>{{ $market->city->name }}</td>
+                <td>
+                    @forelse($market->cities as $city)
+                        <span class="label label-primary">{{ $city->name }}</span>
+                    @empty
+                        <span class="text-muted">Sin ciudades</span>
+                    @endforelse
+                </td>
                 <td>
                    <div class="btn-group" role="group">
                         <a href="#" class="btn btn-info"><i class="glyphicon glyphicon-eye-open"></i></a>

@@ -11,6 +11,7 @@ class City extends Model
     ];
 
     public function markets() {
-        return $this->hasMany(Market::class);
+        // return $this->hasMany(Market::class);
+        return $this->belongsToMany(Market::class);
     }
 }

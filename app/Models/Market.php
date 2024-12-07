@@ -12,8 +12,12 @@ class Market extends Model
         'market_type_id',
     ];
 
-    public function city() {
-        return $this->belongsTo(City::class);
+    // public function city() {
+    //     return $this->belongsTo(City::class);
+    // }
+
+    public function cities() {
+        return $this->belongsToMany(City::class);
     }
 
     public function marketType() {
