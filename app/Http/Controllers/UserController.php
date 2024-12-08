@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Market;
 
+use Spatie\Permission\Models\Role;
+
 class UserController extends Controller
 {
     public function index()
@@ -20,6 +22,8 @@ class UserController extends Controller
     public function create()
     {
         $markets = Market::all();
+        $roles = Role::pluck('name','name')->all();
+
         return view('users.create', compact('markets'));
     }
 
@@ -30,8 +34,9 @@ class UserController extends Controller
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6|confirmed',
             'market_id' => 'nullable|exists:markets,id',
+            'roles' => 'required'
         ]);
-
+        
         User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -39,7 +44,15 @@ class UserController extends Controller
             'market_id' => $request->market_id,
         ]);
 
+        $user->assignRole($request->input('roles'));
+
         return redirect()->route('users.index')->with('success', 'Usuario creado exitosamente.');
+    }
+
+    public function show($id) {
+        $user = User::find($id);
+
+        return view('users.show',compact('user'));
     }
 
     public function edit(User $user)

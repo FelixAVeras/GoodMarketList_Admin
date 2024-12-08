@@ -8,7 +8,9 @@
     @stack('loginStyle')
 </head>
 <body>
-    @include('navbar')
+    @auth
+        @include('navbar')
+    @endauth
     <div class="container">
         @yield('content')
     </div>
