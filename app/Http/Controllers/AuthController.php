@@ -5,11 +5,16 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
     public function showLoginForm() {
+        if (Auth::check()) {
+            return redirect()->route('markets.index');
+        }
+
         return view('auth.login');
     }
 
@@ -21,9 +26,22 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
+            $user = Auth::user();
             
-            return redirect()->route('markets.index');
+            if ($user->hasRole('admin') || $user->hasRole('manager')) {
+                $request->session()->regenerate();
+                
+                return redirect()->intended('dashboard');
+            }
+
+            // if ($user->hasRole('manager')) {
+            //     $request->session()->regenerate();
+                
+            //     return redirect()->intended('categories.index');
+            // }
+            
+            // return redirect()->route('markets.index');
+            return back()->withErrors(['email' => 'Invalid credentials']);
         }
 
         return back()->withErrors([
@@ -31,12 +49,20 @@ class AuthController extends Controller
         ]);
     }
 
-    public function logout(Request $request) {
+    public function logout(Request $request): RedirectResponse
+    {
         Auth::logout();
+     
+        // $this->guard()->logout();
+        
+        $request->session()->flush();
+        
+        $request->session()->regenerate();
 
         $request->session()->invalidate();
+     
         $request->session()->regenerateToken();
-        
-        return redirect('/login');
+     
+        return redirect()->route('login');
     }
 }

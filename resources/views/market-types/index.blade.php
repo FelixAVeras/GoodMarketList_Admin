@@ -15,7 +15,7 @@
 </div>
 
 <div class="table-responsive">
-    <table class="table table-hover">
+    <table class="table table-hover table-striped">
         <thead>
             <tr>
                 <th>Nombre</th>
@@ -27,14 +27,12 @@
             <tr>
                 <td>{{ $mt->name }}</td>
                 <td>
-                   <div class="btn-group" role="group">
-                        <a href="{{ route('market-types.edit', $mt->id) }}" class="btn btn-warning"><i class="glyphicon glyphicon-pencil"></i></a>
-                        <form action="{{ route('market-types.destroy', $mt->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
-                        </form>
-                    </div>
+                    <a href="{{ route('market-types.edit', $mt->id) }}" data-toggle="tooltip" data-placement="top" title="Editar" class="btn btn-warning"><i class="glyphicon glyphicon-pencil"></i></a>
+                    <form action="{{ route('market-types.destroy', $mt->id) }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" data-toggle="tooltip" data-placement="top" title="Eliminar" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
+                    </form>
                 </td>
             </tr>
             @empty

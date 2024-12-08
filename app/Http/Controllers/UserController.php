@@ -22,9 +22,9 @@ class UserController extends Controller
     public function create()
     {
         $markets = Market::all();
-        $roles = Role::pluck('name','name')->all();
+        $roles = Role::all();
 
-        return view('users.create', compact('markets'));
+        return view('users.create', compact('markets', 'roles'));
     }
 
     public function store(Request $request)
@@ -37,14 +37,14 @@ class UserController extends Controller
             'roles' => 'required'
         ]);
         
-        User::create([
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'market_id' => $request->market_id,
         ]);
 
-        $user->assignRole($request->input('roles'));
+        $user->assignRole($request->role);
 
         return redirect()->route('users.index')->with('success', 'Usuario creado exitosamente.');
     }

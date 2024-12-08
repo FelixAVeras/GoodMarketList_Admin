@@ -9,6 +9,8 @@ use App\Models\Market;
 use App\Models\City;
 use App\Models\MarketType;
 
+use Illuminate\Support\Facades\Log;
+
 class MarketsController extends Controller
 {
     public function index() {

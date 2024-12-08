@@ -15,7 +15,7 @@
 </div>
 
 <div class="table-responsive">
-    <table class="table table-hover">
+    <table class="table table-hover table-striped">
         <thead>
             <tr>
                 <th>Nombre</th>
@@ -37,15 +37,13 @@
                     @endforelse
                 </td>
                 <td>
-                   <div class="btn-group" role="group">
-                        <a href="#" class="btn btn-info"><i class="glyphicon glyphicon-eye-open"></i></a>
-                        <a href="{{ route('markets.edit', $market->id) }}" class="btn btn-warning"><i class="glyphicon glyphicon-pencil"></i></a>
-                        <form action="{{ route('markets.destroy', $market->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
-                        </form>
-                    </div>
+                    <a href="#" data-toggle="tooltip" data-placement="top" title="Detalles" class="btn btn-info"><i class="glyphicon glyphicon-eye-open"></i></a>
+                    <a href="{{ route('markets.edit', $market->id) }}" data-toggle="tooltip" data-placement="top" title="Editar" class="btn btn-warning"><i class="glyphicon glyphicon-pencil"></i></a>
+                    <form action="{{ route('markets.destroy', $market->id) }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" data-toggle="tooltip" data-placement="top" title="Eliminar" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
+                    </form>
                 </td>
             </tr>
             @empty

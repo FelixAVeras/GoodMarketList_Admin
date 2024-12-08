@@ -64,6 +64,17 @@
                     </select>
                 </div>
             </div>
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label for="market_id" class="form-label">Rol</label>
+                    <select id="roles" name="roles" class="form-control">
+                        <option value="">Sin asignar</option>
+                        @foreach($roles as $role)
+                            <option value="{{ $role->id }}">{{ $role->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
         </div>
         
         <button type="submit" class="btn btn-success">Guardar</button>
