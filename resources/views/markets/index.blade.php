@@ -6,7 +6,7 @@
 
 @section('content')
 
-<h3 class="display-4 mb-4">Mercados</h3>
+<h3 class="display-4 mb-4">Listado de Mercados</h3>
 
 <div class="row">
     <div class="col-xs-12 col-md-12">

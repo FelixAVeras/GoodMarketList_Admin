@@ -1,7 +1,7 @@
 @extends('master')
 
 @section('content')
-<h3 class="display-4 mb-4">Usuarios</h3>
+<h3 class="display-4 mb-4">Listado de Usuarios</h3>
 
 <div class="row">
     <div class="col-xs-12 col-md-4">

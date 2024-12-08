@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Market extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'name',
         'city_id',
@@ -22,5 +25,10 @@ class Market extends Model
 
     public function marketType() {
         return $this->belongsTo(MarketType::class);
+    }
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'market_product');
     }
 }
