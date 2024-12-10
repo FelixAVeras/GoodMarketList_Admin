@@ -19,6 +19,17 @@ class MarketsController extends Controller
         return view('markets.index', compact('markets'));
     }
 
+    public function show(Market $market)
+    {
+        // Aquí no es necesario buscar el mercado manualmente con Market::find($id)
+        // ya que estamos utilizando la inyección de dependencias de Eloquent.
+
+        // Cargar las relaciones necesarias, por ejemplo, las ciudades y el tipo de mercado.
+        $market->load(['cities', 'marketType', 'products']);
+
+        return view('markets.show', compact('market'));
+    }
+
     public function create() {
         $marketTypes = MarketType::all();
         $cities = City::all();

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GoodMarket List - Admin || @yield('title')</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://bootswatch.com/3/readable/bootstrap.min.css">
     @stack('loginStyle')
     <style>
         .container { padding: 10px; }

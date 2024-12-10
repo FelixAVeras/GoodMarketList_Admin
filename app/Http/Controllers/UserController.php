@@ -29,12 +29,18 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
+        $currentUser = auth()->user();
+
+        if (!$currentUser->hasRole('admin')) {
+            return redirect()->route('users.index')->with('error', 'No puede crear usuarios. Contacte al Administrador del sistema.');
+        }
+
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6|confirmed',
             'market_id' => 'nullable|exists:markets,id',
-            'roles' => 'required'
+            'role' => 'required'
         ]);
         
         $user = User::create([
@@ -63,6 +69,12 @@ class UserController extends Controller
 
     public function update(Request $request, User $user)
     {
+        $currentUser = auth()->user();
+
+        if (!$currentUser->hasRole('admin')) {
+            return redirect()->route('users.index')->with('error', 'No puede crear usuarios. Contacte al Administrador del sistema.');
+        }
+
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $user->id,
@@ -82,6 +94,12 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
+        $currentUser = auth()->user();
+
+        if (!$currentUser->hasRole('admin')) {
+            return redirect()->route('users.index')->with('error', 'No puede crear usuarios. Contacte al Administrador del sistema.');
+        }
+
         $user->delete();
         return redirect()->route('users.index')->with('success', 'Usuario eliminado exitosamente.');
     }

@@ -14,8 +14,22 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::with('category', 'markets')->get();
-        
+        $user = auth()->user();
+
+        // Verificar si el usuario tiene un mercado asignado
+        if ($user->hasRole('manager') && !$user->market) {
+            return redirect()->back()->with('error', 'No tiene un mercado asociado.');
+        }
+
+        // Si el usuario tiene el rol 'manager'
+        if ($user->hasRole('manager')) {
+            $products = Product::whereHas('markets', function ($query) use ($user) {
+                $query->where('markets.id', $user->market->id);
+            })->with('category', 'markets')->get();
+        } else {
+            $products = Product::with('category', 'markets')->get();
+        }
+
         return view('products.index', compact('products'));
     }
 
@@ -28,10 +42,32 @@ class ProductController extends Controller
 
     public function create()
     {
+        $user = auth()->user();
+
+        if ($user->hasRole('manager')) {
+            $categories = Category::all();
+            
+            $market = $user->market;
+
+            if (!$market) {
+                return redirect()->back()->with('error', 'No market associated with this manager.');
+            }
+    
+            // return view('products.create', ['market' => $market]);
+            return view('products.create', [
+                'market' => $market,
+                'categories' => $categories
+            ]);
+        }
+
         $markets = Market::all();
         $categories = Category::all();
 
-        return view('products.create', compact('markets', 'categories'));
+        // return view('products.create', compact('markets', 'categories'));
+        return view('products.create', [
+            'markets' => $markets,
+            'categories' => $categories
+        ]);
     }
 
     public function store(Request $request)
@@ -46,10 +82,12 @@ class ProductController extends Controller
             'markets' => 'required|array',
             'barcodes' => 'nullable|string',
             'isAvailable' => 'boolean',
+            'market_id' => 'required|exists:markets,id',
         ]);
 
         $validated['isAvailable'] = $request->has('isAvailable');
 
+        // Crear el producto
         $product = Product::create($validated);
 
         // Asociar los códigos de barras
@@ -79,7 +117,8 @@ class ProductController extends Controller
         $product->average_price = $product->calculateAveragePrice();
         $product->save();
 
-        return redirect()->route('products.index');
+        return redirect()->route('products.index')->with('success', 'Producto creado exitosamente.');
     }
+
 
 }

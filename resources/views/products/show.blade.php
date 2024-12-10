@@ -4,6 +4,22 @@
     <h2>{{ $product->name }} <small class="text-muted">Detalles del Producto</small></h2>
 
     <div class="row">
+        <div class="col-xs-12 col-md-12">
+            <div class="pull-right">
+                <a href="{{ route('products.index') }}" class="btn btn-default">Volver a la Lista</a>
+                <a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Editar" class="btn btn-warning"><i class="glyphicon glyphicon-pencil"></i></a>
+                <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display:inline-block;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar">
+                        <i class="glyphicon glyphicon-trash"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
         <div class="col-xs-12 col-md-4">
             <h3>Datos del Producto</h3>
             <ul class="list-group">
@@ -37,15 +53,5 @@
                 @endforeach
             </div>
         </div>
-    </div>
-
-    <div class="mt-3">
-        <a href="{{ route('products.index') }}" class="btn btn-primary">Volver a la Lista</a>
-        <a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning">Editar Producto</a>
-        <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display:inline-block;">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="btn btn-danger">Eliminar Producto</button>
-        </form>
     </div>
 @endsection

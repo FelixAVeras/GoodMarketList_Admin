@@ -28,15 +28,15 @@ Inicio de Sesion
                         <div class="col-xs-12 col-md-4">
                             <button type="submit" class="btn btn-primary">Iniciar Sesion</button>
                         </div>
-                        <div class="col-xs-12 col-md-8">
+                        <!-- <div class="col-xs-12 col-md-8">
                             <button type="submit" class="btn btn-default pull-right">Registrar Usuario</button>
-                        </div>
+                        </div> -->
                     </div>
                 </form>
             </div>
         </div>
 
-        <a href="#">Olvido su Contraseña?</a>
+        <!-- <a href="#">Olvido su Contraseña?</a> -->
     </div>
 </div>
 

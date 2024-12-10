@@ -25,12 +25,6 @@
             </div>
             <div class="col-xs-12 col-md-4">
                 <div class="form-group">
-                    <label for="email" class="form-label">Telefono</label>
-                    <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}">
-                </div>
-            </div>
-            <div class="col-xs-12 col-md-4">
-                <div class="form-group">
                     <label for="email" class="form-label">Email</label>
                     <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}">
                 </div>
@@ -67,10 +61,10 @@
             <div class="col-xs-12 col-md-4">
                 <div class="form-group">
                     <label for="market_id" class="form-label">Rol</label>
-                    <select id="roles" name="roles" class="form-control">
+                    <select id="roles" name="role" class="form-control">
                         <option value="">Sin asignar</option>
                         @foreach($roles as $role)
-                            <option value="{{ $role->id }}">{{ $role->name }}</option>
+                            <option value="{{ $role->name }}">{{ $role->name }}</option>
                         @endforeach
                     </select>
                 </div>

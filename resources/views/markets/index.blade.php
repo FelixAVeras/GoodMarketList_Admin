@@ -37,7 +37,7 @@
                     @endforelse
                 </td>
                 <td>
-                    <a href="#" data-toggle="tooltip" data-placement="top" title="Detalles" class="btn btn-info"><i class="glyphicon glyphicon-eye-open"></i></a>
+                    <a href="{{ route('markets.show', $market->id) }}" data-toggle="tooltip" data-placement="top" title="Detalles" class="btn btn-info"><i class="glyphicon glyphicon-eye-open"></i></a>
                     <a href="{{ route('markets.edit', $market->id) }}" data-toggle="tooltip" data-placement="top" title="Editar" class="btn btn-warning"><i class="glyphicon glyphicon-pencil"></i></a>
                     <form action="{{ route('markets.destroy', $market->id) }}" method="POST" style="display:inline;">
                         @csrf

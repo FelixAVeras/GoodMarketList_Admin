@@ -1,5 +1,9 @@
 @extends('master')
 
+@section('title')
+Usuarios
+@endsection
+
 @section('content')
 <h3 class="display-4 mb-4">Listado de Usuarios</h3>
 
