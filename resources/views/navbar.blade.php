@@ -1,4 +1,4 @@
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -61,8 +61,9 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-user"></i> &nbsp {{ Auth::user()->name }} <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <!-- <li><a href="#">Action</a></li>
-            <li role="separator" class="divider"></li> -->
+            <li><a href="#">Mi Perfil</a></li>
+            <li><a href="#">Configuracion</a></li>
+            <li role="separator" class="divider"></li>
             <li>
               <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                   Salir

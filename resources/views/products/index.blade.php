@@ -15,6 +15,8 @@
     </div>
 </div>
 
+<br>
+
 @if($products->isEmpty())
     <h3 class="text-center text-danger">Sin Informacion</h3>
 @else
@@ -23,29 +25,30 @@
                 <thead>
                     <tr>
                         <!-- <th>Imagen</th> -->
-                        <th>Id Producto</th>
+                        <!-- <th>Id Producto</th> -->
                         <th>Codigo de Barras</th>
                         <th>Nombre</th>
                         <th>Unidad</th>
                         <th>Categoria</th>
                         <th>Esta Diponible?</th>
-                        <th>Precio Promedio</th>
+                        <!-- <th>Precio Promedio</th> -->
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse ($products as $product)
                     <tr>
-                        <td>{{ $product->product_code }}</td>
+                        <!-- <td>{{ $product->product_code }}</td> -->
                         <td>{{ $product->barcode }}</td>
                         <td>{{ $product->name }}</td>
                         <td>{{ $product->unit }}</td>
                         <td>{{ $product->category->name }}</td>
                         <td>{{ $product->isAvailable ? 'Sí' : 'No' }}</td>
-                        <td>{{ $product->average_price }}</td>
+                        <!-- <td>{{ $product->average_price }}</td> -->
                         <td>
                             <a href="{{ route('products.show', $product->id) }}" data-toggle="tooltip" data-placement="top" title="Detalles" class="btn btn-info"><i class="glyphicon glyphicon-eye-open"></i></a>
                             <a href="{{ route('products.edit', $product->id) }}" data-toggle="tooltip" data-placement="top" title="Editar" class="btn btn-warning"><i class="glyphicon glyphicon-pencil"></i></a>
+                            @if(Auth::user()->hasRole('admin'))
                             <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display: inline;">
                                 @csrf
                                 @method('DELETE')
@@ -53,11 +56,12 @@
                                     <i class="glyphicon glyphicon-trash"></i>
                                 </button>
                             </form>
+                            @endif
                         </td>
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="4" </td>
+                        <td colspan="6">No hay productos disponibles</td>
                     </tr>
                     @endforelse
                 </tbody>

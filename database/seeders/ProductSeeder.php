@@ -21,23 +21,23 @@ class ProductSeeder extends Seeder
 
         $productsByCategory = [
             'Frutas y Verduras' => [
-                ['name' => 'Manzana', 'unit' => 'kg'],
-                ['name' => 'Plátano', 'unit' => 'kg'],
-                ['name' => 'Zanahoria', 'unit' => 'kg'],
-                ['name' => 'Espinaca', 'unit' => 'kg'],
+                ['name' => 'Manzana', 'unit' => 'Libra'],
+                ['name' => 'Plátano', 'unit' => 'Unidad'],
+                ['name' => 'Zanahoria', 'unit' => 'Libra'],
+                ['name' => 'Espinaca', 'unit' => 'Libra'],
                 ['name' => 'Pimiento', 'unit' => 'unidad'],
             ],
             'Carnes y Pescados' => [
-                ['name' => 'Pollo', 'unit' => 'kg'],
-                ['name' => 'Carne de Res', 'unit' => 'kg'],
-                ['name' => 'Pescado', 'unit' => 'kg'],
-                ['name' => 'Cerdo', 'unit' => 'kg'],
-                ['name' => 'Camarones', 'unit' => 'kg'],
+                ['name' => 'Pollo', 'unit' => 'Libra'],
+                ['name' => 'Carne de Res', 'unit' => 'Libra'],
+                ['name' => 'Pescado', 'unit' => 'Libra'],
+                ['name' => 'Cerdo', 'unit' => 'Libra'],
+                ['name' => 'Camarones', 'unit' => 'Libra'],
             ],
             'Lácteos y Huevos' => [
                 ['name' => 'Leche', 'unit' => 'litro'],
                 ['name' => 'Huevos', 'unit' => 'docena'],
-                ['name' => 'Queso', 'unit' => 'kg'],
+                ['name' => 'Queso', 'unit' => 'Libra'],
                 ['name' => 'Yogur', 'unit' => 'unidad'],
                 ['name' => 'Mantequilla', 'unit' => 'kg'],
             ],
@@ -65,12 +65,11 @@ class ProductSeeder extends Seeder
 
             foreach ($productsByCategory[$category->name] as $productData) {
                 $product = Product::create([
-                    'product_code' => 'PRD-' . strtoupper(str()->random(6)),
                     'barcode' => str_pad(rand(1, 999999999999), 12, '0', STR_PAD_LEFT),
                     'name' => $productData['name'],
                     'unit' => $productData['unit'],
                     'category_id' => $category->id,
-                    'average_price' => rand(10, 100) / 10,
+                    // 'average_price' => rand(10, 100) / 10,
                     'image_url' => 'https://via.placeholder.com/150',
                     'isAvailable' => rand(0, 1),
                 ]);

@@ -105,13 +105,13 @@ class PermissionTableSeeder extends Seeder
             'email' => 'isargenys@gmail.com',
             'password' => bcrypt('123456')
         ]);
-        $managerUser->assignRole($managerRole);
+        $managerUser->assignRole($adminRole);
 
-        $providerUser = User::create([
-            'name' => 'Pedro Garcia',
-            'email' => 'pgarcia@gmail.com',
-            'password' => bcrypt('123456')
-        ]);
-        $providerUser->assignRole($providerRole);
+        // $providerUser = User::create([
+        //     'name' => 'Pedro Garcia',
+        //     'email' => 'pgarcia@gmail.com',
+        //     'password' => bcrypt('123456')
+        // ]);
+        // $providerUser->assignRole($providerRole);
     }
 }

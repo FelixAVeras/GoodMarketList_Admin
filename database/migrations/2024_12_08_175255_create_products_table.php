@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('product_code')->nullable()->unique(); // Código de producto
-            $table->string('barcode')->nullable(); // Código de barras
-            $table->string('name'); // Nombre del producto
-            $table->string('unit'); // Unidad de medida (ej: kg, litro, unidad)
-            $table->foreignId('category_id')->constrained()->onDelete('cascade'); // Relación con la categoría
-            $table->decimal('average_price', 10, 2); // Precio promedio
-            $table->string('image_url')->nullable(); // URL de la imagen
+            $table->string('barcode')->nullable();
+            $table->string('name');
+            $table->string('unit');
+            $table->foreignId('category_id')->constrained()->onDelete('cascade');
+            // $table->decimal('average_price', 10, 2);
+            $table->string('image_url')->nullable();
             $table->boolean('isAvailable')->default(true);
-            $table->foreignId('market_id')->constrained()->onDelete('cascade');
+            // $table->foreignId('market_id')->constrained()->onDelete('cascade');
+            $table->foreignId('market_id')->nullable()->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -26,7 +26,7 @@
                 <li class="list-group-item"><strong>ID del Producto:</strong> {{ $product->id }}</li>
                 <li class="list-group-item"><strong>Código de Barras:</strong> {{ $product->barcode }}</li>
                 <li class="list-group-item"><strong>Unidad:</strong> {{ $product->unit }}</li>
-                <li class="list-group-item"><strong>Precio Promedio:</strong> ${{ $product->average_price }}</li>
+                <li class="list-group-item"><strong>Precio Promedio:</strong> RD${{ number_format($averagePrice, 2) }}</li>
                 <li class="list-group-item"><strong>Disponible:</strong> 
                     <span class="badge {{ $product->isAvailable ? 'bg-success' : 'bg-danger' }}">
                         {{ $product->isAvailable ? 'Sí' : 'No' }}
@@ -48,7 +48,7 @@
                 @foreach ($product->markets as $market)
                     <a href="#" class="list-group-item">
                         <h4 class="list-group-item-heading">{{ $market->name }}</h4>
-                        <p class="list-group-item-text">{{ $market->id }} (Aqui va el precio por mercado)</p>
+                        <p class="list-group-item-text">RD$ {{ number_format($market->pivot->price, 2) }}</p>
                     </a>
                 @endforeach
             </div>

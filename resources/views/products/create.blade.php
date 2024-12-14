@@ -37,12 +37,12 @@
     <hr>
 
     <div class="row">
-        <div class="col-xs-12 col-md-4">
+        <!-- <div class="col-xs-12 col-md-4">
             <div class="form-group">
                 <label for="">Codigo de Producto</label>
                 <input type="text" name="product_code" class="form-control">
             </div>
-        </div>
+        </div> -->
         <div class="col-xs-12 col-md-4">
             <div class="form-group">
                 <label for="">Codigo de Barras</label>
@@ -82,7 +82,7 @@
             <div class="form-group">
                 <label for="">Precio</label>
                 <div class="input-group">
-                    <span class="input-group-addon">$</span>
+                    <span class="input-group-addon">RD$</span>
                     <input type="text" name="price" class="form-control" aria-label="Amount (to the nearest dollar)">
                 </div>
             </div>

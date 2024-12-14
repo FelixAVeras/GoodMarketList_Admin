@@ -10,7 +10,6 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable = [
-        'product_code', 
         'barcode', 
         'name', 
         'unit', 
@@ -25,9 +24,14 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
+    // public function markets()
+    // {
+    //     return $this->belongsToMany(Market::class, 'market_product');
+    // }
+
     public function markets()
     {
-        return $this->belongsToMany(Market::class, 'market_product');
+        return $this->belongsToMany(Market::class)->withPivot('price');
     }
 
     public function barcodes()
@@ -37,9 +41,6 @@ class Product extends Model
 
     public function calculateAveragePrice()
     {
-        $totalPrice = $this->markets->sum('price'); // Asumiendo que cada market tiene un precio para el producto
-        $count = $this->markets->count();
-
-        return $count > 0 ? $totalPrice / $count : 0;
+        return $this->markets()->withPivot('price')->get()->avg('pivot.price');
     }
 }

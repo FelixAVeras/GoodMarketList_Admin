@@ -34,13 +34,6 @@ class AuthController extends Controller
                 return redirect()->intended('dashboard');
             }
 
-            // if ($user->hasRole('manager')) {
-            //     $request->session()->regenerate();
-                
-            //     return redirect()->intended('categories.index');
-            // }
-            
-            // return redirect()->route('markets.index');
             return back()->withErrors(['email' => 'Invalid credentials']);
         }
 
@@ -53,8 +46,6 @@ class AuthController extends Controller
     {
         Auth::logout();
      
-        // $this->guard()->logout();
-        
         $request->session()->flush();
         
         $request->session()->regenerate();
