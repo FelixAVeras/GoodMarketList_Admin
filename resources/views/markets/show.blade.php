@@ -12,12 +12,14 @@
     </div>
     <div class="col-xs-12 col-md-8">
         <div class="pull-right">
-            <a href="{{ route('markets.index') }}" class="btn btn-default">Volver</a>
-            <a href="{{ route('markets.edit', $market->id) }}" class="btn btn-warning">Editar Mercado</a>
+            <a href="{{ route('markets.index') }}" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i> Volver a la Lista</a>
+            <a href="{{ route('markets.edit', $market->id) }}" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Editar Mercado" class="btn btn-warning"><i class="glyphicon glyphicon-pencil"></i></a>
             <form action="{{ route('markets.destroy', $market->id) }}" method="POST" style="display: inline;">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="btn btn-danger">Eliminar Mercado</button>
+                <button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar Mercado">
+                    <i class="glyphicon glyphicon-trash"></i>
+                </button>
             </form>
         </div>
     </div>

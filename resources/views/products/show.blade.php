@@ -6,12 +6,12 @@
     <div class="row">
         <div class="col-xs-12 col-md-12">
             <div class="pull-right">
-                <a href="{{ route('products.index') }}" class="btn btn-default">Volver a la Lista</a>
-                <a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Editar" class="btn btn-warning"><i class="glyphicon glyphicon-pencil"></i></a>
+            <a href="{{ route('products.index') }}" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i> Volver a la Lista</a>
+                <a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Editar Producto" class="btn btn-warning"><i class="glyphicon glyphicon-pencil"></i></a>
                 <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display:inline-block;">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar">
+                    <button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar Producto">
                         <i class="glyphicon glyphicon-trash"></i>
                     </button>
                 </form>

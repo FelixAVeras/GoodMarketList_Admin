@@ -96,7 +96,7 @@ class ProductController extends Controller
             $marketId = $validated['market_id'];
             $price = $validated['price'];
 
-            $product->markets()->attach($marketId, ['price' => $price]);
+            $product->markets()->sync($marketId, ['price' => $price]);
 
             $product->calculateAveragePrice();
 
@@ -106,11 +106,11 @@ class ProductController extends Controller
 
             if ($user->hasRole('admin')) {
                 foreach ($request->markets as $marketId) {
-                    $product->markets()->attach($marketId, ['price' => $validated['price']]);
+                    $product->markets()->sync($marketId, ['price' => $validated['price']]);
                 }
             } elseif ($user->hasRole('manager')) {
                 $managerMarket = $user->market;
-                $product->markets()->attach($managerMarket->id, ['price' => $validated['price']]);
+                $product->markets()->sync($managerMarket->id, ['price' => $validated['price']]);
             }
         });
 
@@ -119,18 +119,13 @@ class ProductController extends Controller
 
     public function edit($id)
     {
-        // Obtener el producto por ID
         $product = Product::findOrFail($id);
-
-        // Obtener las categorías y mercados para usarlos en la vista
         $categories = Category::all();
         $markets = Market::all();
 
-        // Verificar si el usuario tiene un mercado asignado (en caso de ser manager)
         $user = Auth::user();
         $userMarket = $user->hasRole('manager') ? $user->market : null;
 
-        // Pasar el producto, categorías y mercados a la vista
         return view('products.edit', compact('product', 'categories', 'markets', 'userMarket'));
     }
 
@@ -153,17 +148,13 @@ class ProductController extends Controller
         $validated['isAvailable'] = $request->has('isAvailable');
 
         DB::transaction(function () use ($validated, $request, $product, $user) {
-            // Actualizamos los campos del producto
             $product->update($validated);
 
-            // Actualizamos los mercados y los precios asociados
             $marketId = $validated['market_id'];
             $price = $validated['price'];
 
-            // Limpiamos los mercados actuales y los asociamos con el nuevo precio
             $product->markets()->sync([$marketId => ['price' => $price]]);
 
-            // Si el usuario es un manager, solo puede asociar su propio mercado
             if ($user->hasRole('manager')) {
                 $managerMarket = $user->market;
                 $product->markets()->sync([$managerMarket->id => ['price' => $validated['price']]]);

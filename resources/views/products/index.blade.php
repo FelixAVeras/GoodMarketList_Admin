@@ -10,7 +10,15 @@
 
 
 <div class="row">
-    <div class="col-xs-12 col-md-12">
+    <div class="col-xs-12 col-md-4">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Buscar Productos...">
+            <span class="input-group-btn">
+                <button class="btn btn-primary" type="button"><i class="glyphicon glyphicon-search"></i></button>
+            </span>
+        </div>
+    </div>
+    <div class="col-xs-12 col-md-8">
         <a href="{{ route('products.create') }}" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-plus"></i> Agregar Nuevo</a>
     </div>
 </div>

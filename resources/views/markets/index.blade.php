@@ -8,11 +8,23 @@
 
 <h3 class="display-4 mb-4">Listado de Mercados</h3>
 
+<br>
+
 <div class="row">
-    <div class="col-xs-12 col-md-12">
+    <div class="col-xs-12 col-md-4">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Buscar Mercados...">
+            <span class="input-group-btn">
+                <button class="btn btn-primary" type="button"><i class="glyphicon glyphicon-search"></i></button>
+            </span>
+        </div>
+    </div>
+    <div class="col-xs-12 col-md-8">
         <a href="{{ route('markets.create') }}" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-plus"></i> Agregar Nuevo</a>
     </div>
 </div>
+
+<br>
 
 <div class="table-responsive">
     <table class="table table-hover table-striped">
